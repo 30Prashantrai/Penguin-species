@@ -1,0 +1,32 @@
+This code is written to plot a bar chart which differentiate Penguin species with its attributes like Bill 
+length, Bill depth and Flipper Length
+
+
+import matplotlib.pyplot as plt
+species = ["Adelie", "Chinstrap", "Gentoo"]
+penguin_means = {
+    'Bill Depth': (18.35, 18.43, 14.98),
+    'Bill Length': (38.79, 48.83, 47.50),
+    'Flipper Length': (189.95, 195.82, 217.19),
+}
+x = list(range(0,len(species), 1))
+print (x)
+
+width = 0.25  # the width of the bars
+multiplier = 0
+
+fig, ax = plt.subplots(layout='constrained')
+#print (fig,ax)
+for attribute, measurement in penguin_means.items():
+    print (attribute, measurement)
+    offset = width * multiplier
+    rects = ax.bar([i+offset for i in x], measurement, width, label=attribute)
+    ax.bar_label(rects, padding=3)
+    multiplier += 1
+    
+ax.set_ylabel('Length (mm)')
+ax.set_title('Penguin attributes by species')
+ax.set_xticks([i + width for i in x], species)
+ax.legend(loc='upper left', ncol=3)
+ax.set_ylim(0, 250)
+plt.show()
